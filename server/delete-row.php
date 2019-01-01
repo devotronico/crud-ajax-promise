@@ -9,31 +9,26 @@ if ( isset($_POST) ) {
     $result = $mysqli->query("SELECT COUNT(*) FROM utenti");
     $row = $result->fetch_row();
     $rowNumber = $row[0];
-    die( '{ "status": "error", "error": "Le righe sono: '.$numeroRighe.'" }');
+  //  die( '{ "status": "error", "error": "Le righe sono: '.$rowNumber.'" }');
 
    $rowNumber = intval($rowNumber);
     if ( $rowNumber < $rowToDelete ){
         $rowToDelete = $rowNumber;
     }
 
-  //  $sql = "SELECT COUNT(*) FROM utenti";
+ 
+    $sql = "DELETE FROM utenti ORDER BY id DESC LIMIT $rowToDelete";
+//   $sql = "DELETE FROM utenti ORDER BY id DESC LIMIT '".$rowToDelete."'";
 
+    if ($mysqli->query($sql) === TRUE) {
 
-    // INSERT
-          // sql to delete a record
-          $sql = "DELETE FROM utenti ORDER BY id DESC LIMIT $rowToDelete";
-        //   $sql = "DELETE FROM utenti ORDER BY id DESC LIMIT '".$rowToDelete."'";
+        echo '{ "status": "success", "success": "Cancellate 5 righe con successo" }';
+    } else {
 
-          if ($mysqli->query($sql) === TRUE) {
-        
-              echo '{ "status": "success", "success": "Cancellate 5 righe con successo" }';
-          } else {
+    echo '{ "status": "error", "error": "Le righe non sono state cancellate" }';
+    }
 
-            echo '{ "status": "error", "error": "Le righe non sono state cancellate" }';
-          
-          }
-
-          $mysqli->close();
+    $mysqli->close();
     
 
    

@@ -9,17 +9,122 @@
 </head>
 <body>
     <div class="container">
-        <h1>Test1</h1>
-        <button type="button" class="btn btn-primary" id="insert">INSERT</button>
-        <button type="button" class="btn btn-success" id="select">SELECT</button>
-        <button type="button" class="btn btn-danger" id="delete-row">DELETE</button>
-        <!-- <button type="button" class="btn btn-primary" action="insert">Primary</button>
-        <button type="button" class="btn btn-success" action="insert">Success</button>
-        <button type="button" class="btn btn-danger" action="del-row">Danger</button> -->
+      
+      <!-- Modal View-->
+      <!-- modal fade bd-example-modal-xl -->
+      <div class="modal fade" id="modal__view" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalCenterTitle">Dettagli Utente</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">City</th>
+                            <th scope="col">Phone</th>
+                        </tr>
+                    </thead>
+                    <tbody class="view__tbody__name">
+                        <!-- <tr>
+                            <th scope="row" class="view__tbody__id">1</th>
+                            <td class="view__tbody__name">Name</td>
+                            <td class="view__tbody__email">Email</td>
+                            <td class="view__tbody__test1">Test1</td>
+                            <td class="view__tbody__test2">Test2</td>
+                            <td class="view__tbody__test3">Test3</td>
+                        </tr> -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <!-- Modal Update-->
+      <div class="modal fade" id="mymodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="form__id" class="col-form-label">ID:</label>
+                        <input type="text" class="form-control" id="form__id" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="form__name" class="col-form-label">Nome:</label>
+                        <input type="text" class="form-control" id="form__name">
+                    </div>
+                    <div class="form-group">
+                        <label for="form__email" class="col-form-label">Email:</label>
+                        <input type="email" class="form-control" id="form__email">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="update-rand">Rand</button>
+              <button type="button" class="btn btn-primary" id="update-save">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+        <h2 class="text-center">Faker-Crud-Promise</h2>
+        <hr>
+        <div class="row">
+            <div class="col-auto">
+                <button type="button" class="btn btn-primary" id="insert">INSERT</button>
+                <button type="button" class="btn btn-success" id="select">SELECT</button>
+                <button type="button" class="btn btn-danger" id="delete-rows">DELETE</button>
+                <button type="button" class="btn btn-danger" id="truncate">TRUNCATE</button>
+            </div>
+            <div class="col-auto">
+                <form class="form-inline">
+                    <div class="form-group mx-sm-3 mb-2">
+                        <input type="text" class="form-control" id="form__search">
+                    </div>
+                    <button type="button" class="btn btn-primary mb-2" id="search">Search</button>
+                </form>
+            </div>
+        </div>
+
         <div class="content"></div>
+
+
+
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center"></ul>
+        </nav>
+
+
+
     </div>
     <script src="js\faker.js-4.1.0\build\build\faker.js"></script>
     <script type="module" src="js/script.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 </body>
 </html>
 

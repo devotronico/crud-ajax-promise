@@ -20,11 +20,11 @@ $obj = json_decode($str);
 require "db.php";
 
 // INSERT
-$sql = "INSERT INTO utenti ( firstname, email) VALUES "; 
+$sql = "INSERT INTO utenti ( firstname, email, city, phone) VALUES "; 
 
 foreach( $obj as $o ){
 
-        $sql .=  "( '$o->name', '$o->mail'),";
+        $sql .=  "( '$o->name', '$o->mail', '$o->city', '$o->phone'),";
 }
 
 $sql = rtrim($sql, ', ');

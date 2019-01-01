@@ -6,44 +6,22 @@ if ( isset($_POST) ) {
    
     //$obj = json_decode($str);
 
-    
-
-
     require "db.php";
 
-
-    // INSERT
-    // sql to delete a record
     $sql = "DELETE FROM utenti WHERE id=$id";
 
     if ($mysqli->query($sql) === TRUE) {
 
-        echo '{ "status": "success", "success": "Riga cancellata con successo" }';
+        echo '{ "status": "success", "success": "La riga con id '.$id.' è stata cancellata" }';
     } else {
 
-        echo '{ "status": "error", "error": "La Riga con id numero '.$id.' NON è stata cancellata!" }';
+        echo '{ "status": "error", "error": "La riga con id '.$id.' NON è stata cancellata!" }';
     }
 
     $mysqli->close();
 } else {
-    die("NO");
+    header("Location: index.html");
 }
 
 
 
-/*
-
-
-
-// SELECT 
-if ($result = $mysqli->query("SELECT firstname FROM utenti LIMIT 10")) {
-    printf("Select returned %d rows.\n", $result->num_rows);
-
-
-    $result->close();
-}
-
-$mysqli->close();
-
-
-*/
