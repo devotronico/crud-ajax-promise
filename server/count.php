@@ -39,11 +39,15 @@ $search =  $obj->search;
         $row = $result->fetch_row();
         
         $totalRows = $row[0];
-    //    if ($totalRows > 0) {
 
-        $pageLast = ceil($totalRows / $rowForPage);
+        if ($totalRows > 0) {
 
-        echo '{ "status": "count", "count": "ci sono '.$totalRows.' righe", "totalRows": "'.$totalRows.'", "rowForPage": "'.$rowForPage.'", "pageLast": "'.$pageLast.'" }';
+            $pageLast = ceil($totalRows / $rowForPage);
+
+            echo '{ "status": "count", "count": "ci sono '.$totalRows.' righe", "totalRows": "'.$totalRows.'", "rowForPage": "'.$rowForPage.'", "pageLast": "'.$pageLast.'" }';
+        }else{
+            echo '{ "status": "ok", "action": "count", "empty": "Database Vuoto!" }';
+        }
     } else {
 
         echo '{ "status": "error", "error": "Error in file count.php!" }';

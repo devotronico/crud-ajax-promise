@@ -16,10 +16,13 @@ $obj = json_decode($str);
 $id = $obj->id;
 $name = $obj->name;
 $mail =$obj->mail;
+$city =$obj->city;
+$phone =$obj->phone;
 
 require "db.php";
 
-$sql = "UPDATE utenti SET firstname = '".$name."', email = '".$mail."' WHERE id = '".$id."'";
+// $sql = "UPDATE utenti SET firstname = '".$name."', email = '".$mail."', city = '".$city."', phone = '".$phone."' WHERE id = '".$id."'";
+$sql = "UPDATE utenti SET firstname = '{$name}', email = '{$mail}', city = '{$city}', phone = '{$phone}' WHERE id = '{$id}'";
 
 if ($mysqli->query($sql) ) {
 

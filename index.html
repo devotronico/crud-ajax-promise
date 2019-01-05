@@ -11,7 +11,6 @@
     <div class="container">
       
       <!-- Modal View-->
-      <!-- modal fade bd-example-modal-xl -->
       <div class="modal fade" id="modal__view" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
           <div class="modal-content">
@@ -54,11 +53,11 @@
 
       
       <!-- Modal Update-->
-      <div class="modal fade" id="mymodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="modal__update" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Update</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -66,16 +65,24 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label for="form__id" class="col-form-label">ID:</label>
-                        <input type="text" class="form-control" id="form__id" readonly>
+                        <label for="form__update-id" class="col-form-label">ID:</label>
+                        <input type="text" class="form-control" id="form__update-id" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="form__name" class="col-form-label">Nome:</label>
-                        <input type="text" class="form-control" id="form__name">
+                        <label for="form__update-name" class="col-form-label">Nome:</label>
+                        <input type="text" class="form-control" id="form__update-name">
                     </div>
                     <div class="form-group">
-                        <label for="form__email" class="col-form-label">Email:</label>
-                        <input type="email" class="form-control" id="form__email">
+                        <label for="form__update-email" class="col-form-label">Email:</label>
+                        <input type="email" class="form-control" id="form__update-email">
+                    </div>
+                    <div class="form-group">
+                        <label for="form__update-city" class="col-form-label">City:</label>
+                        <input type="text" class="form-control" id="form__update-city">
+                    </div>
+                    <div class="form-group">
+                        <label for="form__update-tel" class="col-form-label">Tel:</label>
+                        <input type="text" class="form-control" id="form__update-tel">
                     </div>
                 </form>
             </div>
@@ -89,22 +96,84 @@
       </div>
 
 
+      <!-- Modal Insert-->
+      <div class="modal fade" id="modal__insert" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Insert</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="form__insert-name" class="col-form-label">Nome:</label>
+                        <input type="text" class="form-control" id="form__insert-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="form__insert-email" class="col-form-label">Email:</label>
+                        <input type="email" class="form-control" id="form__insert-email">
+                    </div>
+                    <div class="form-group">
+                        <label for="form__insert-city" class="col-form-label">City:</label>
+                        <input type="text" class="form-control" id="form__insert-city">
+                    </div>
+                    <div class="form-group">
+                        <label for="form__insert-tel" class="col-form-label">Tel:</label>
+                        <input type="tel" class="form-control" id="form__insert-tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                        <span class="note">Format: 123-456-7890</span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="insert-rand">Rand</button>
+              <button type="button" class="btn btn-primary" id="insert-save">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
         <h2 class="text-center">Faker-Crud-Promise</h2>
         <hr>
         <div class="row">
-            <div class="col-auto">
-                <button type="button" class="btn btn-primary" id="insert">INSERT</button>
-                <button type="button" class="btn btn-success" id="select">SELECT</button>
-                <button type="button" class="btn btn-danger" id="delete-rows">DELETE</button>
-                <button type="button" class="btn btn-danger" id="truncate">TRUNCATE</button>
+            <div class="col-md-1 text-center">
+                <button type="button" class="btn btn-primary" id="insert-one" data-toggle="modal" data-target="#modal__insert">Insert</button>
+                <!-- <button type="button" class="btn btn-primary" id="insert-rows">INSERT ROWS</button> -->
             </div>
-            <div class="col-auto">
-                <form class="form-inline">
-                    <div class="form-group mx-sm-3 mb-2">
-                        <input type="text" class="form-control" id="form__search">
+
+            <div class="col-md-3 text-center">
+                <form class="form-inline justify-content-center">
+                    <div class="form-group mx-sm-1 mb-2">
+                        <input type="number" class="form-control" id="form__insert_rows" style="width:70px" value="2">
                     </div>
-                    <button type="button" class="btn btn-primary mb-2" id="search">Search</button>
+                    <button type="button" class="btn btn-primary mb-2" id="insert-rows">Insert Rows</button>
                 </form>
+            </div>
+          
+            <div class="col-md-3">
+                <form class="form-inline justify-content-center">
+                    <div class="form-group mx-sm-1 mb-2">
+                        <input type="text" class="form-control" id="form__search" style="width:100px">
+                    </div>
+                    <button type="button" class="btn btn-success mb-2" id="search">Search</button>
+                </form>
+            </div>
+
+            <div class="col-md-3 text-center">
+                <form class="form-inline justify-content-center">
+                    <div class="form-group mx-sm-1 mb-2">
+                        <input type="number" class="form-control" id="form__delete_rows" style="width:60px" value="2">
+                    </div>
+                    <button type="button" class="btn btn-danger mb-2" id="delete-rows">Delete Rows</button>
+                </form>
+            </div>
+
+            <div class="col-md-1 text-center">
+                <button type="button" class="btn btn-danger" id="truncate">Truncate</button>
             </div>
         </div>
 

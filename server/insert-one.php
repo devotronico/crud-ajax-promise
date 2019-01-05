@@ -20,19 +20,12 @@ $obj = json_decode($str);
 require "db.php";
 
 // INSERT
-$sql = "INSERT INTO utenti ( firstname, email, city, phone) VALUES "; 
-
-foreach( $obj as $o ){
-
-        $sql .=  "( '$o->name', '$o->mail', '$o->city', '$o->phone'),";
-}
-
-$sql = rtrim($sql, ', ');
+$sql = "INSERT INTO utenti ( firstname, email, city, phone) VALUES ( '$obj->name', '$obj->mail', '$obj->city', '$obj->phone')"; 
 
 
 if ($mysqli->query($sql) ) {
 
-     echo '{ "status": "success", "success": "Inserite nuove righe nel database" }';
+     echo '{ "status": "success", "success": "Inserite nuova riga nel database" }';
     // $result->close();
 } else {
     // echo "Error";
@@ -43,7 +36,7 @@ $mysqli->close();
 
 
 
-
+// {name: insert_name, mail: insert_mail, city: insert_city, phone: insert_tel};
 
  
 

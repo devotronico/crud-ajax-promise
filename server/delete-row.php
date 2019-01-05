@@ -1,40 +1,48 @@
 <?php
 
-if ( isset($_POST) ) {
+if ( !isset($_POST) ) {
+header("Location: index.html");
+die;
+} 
 
-    require "db.php";
+if ( !isset($_POST["rows"]) ) {
+    die('{ "status": "error", "error": "Data not found" }');
+}
 
-    $rowToDelete = 3;
 
-    $result = $mysqli->query("SELECT COUNT(*) FROM utenti");
-    $row = $result->fetch_row();
-    $rowNumber = $row[0];
-  //  die( '{ "status": "error", "error": "Le righe sono: '.$rowNumber.'" }');
+$rowToDelete = $_POST["rows"];
 
-   $rowNumber = intval($rowNumber);
-    if ( $rowNumber < $rowToDelete ){
-        $rowToDelete = $rowNumber;
-    }
 
- 
-    $sql = "DELETE FROM utenti ORDER BY id DESC LIMIT $rowToDelete";
+require "db.php";
+
+
+$result = $mysqli->query("SELECT COUNT(*) FROM utenti");
+$row = $result->fetch_row();
+$rowNumber = $row[0];
+//  die( '{ "status": "error", "error": "Le righe sono: '.$rowNumber.'" }');
+
+$rowNumber = intval($rowNumber);
+if ( $rowNumber < $rowToDelete ){
+    $rowToDelete = $rowNumber;
+}
+
+
+$sql = "DELETE FROM utenti ORDER BY id DESC LIMIT $rowToDelete";
 //   $sql = "DELETE FROM utenti ORDER BY id DESC LIMIT '".$rowToDelete."'";
 
-    if ($mysqli->query($sql) === TRUE) {
+if ($mysqli->query($sql) === TRUE) {
 
-        echo '{ "status": "success", "success": "Cancellate 5 righe con successo" }';
-    } else {
+    echo '{ "status": "success", "success": "Cancellate '.$rowToDelete.' righe con successo" }';
+} else {
 
-    echo '{ "status": "error", "error": "Le righe non sono state cancellate" }';
-    }
+echo '{ "status": "error", "error": "Le righe non sono state cancellate" }';
+}
 
-    $mysqli->close();
+$mysqli->close();
     
 
    
-} else {
-    header("Location: index.html");
-}
+
 
 
 

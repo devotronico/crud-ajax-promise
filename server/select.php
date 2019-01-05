@@ -76,7 +76,7 @@
             $result->free();
         } else {
             
-            echo '{ "status": "empty", "empty": "Database Vuoto 2!" }';
+            echo '{ "status": "ok", "action": "select", "empty": "Database Vuoto 2!" }';
            // echo '{ "status": "empty", "empty": "pageLast: '.$pageLast.' rowStart: '.$rowStart.' rowForPage: '.$rowForPage.'" }'; die;
         } 
     }

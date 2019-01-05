@@ -1,12 +1,16 @@
 
 
-  function pagination(currentPage, pageLast ){
-    let ul = document.querySelector('.pagination'); //    <ul class="pagination justify-content-center">
+  function pagination(currentPage, pageLast=1 ){
+    let ul = document.querySelector('.pagination'); // seleziona il nodo: <ul class="pagination justify-content-center">
     ul.innerHTML = '';
     let tmpvarPagination = '';
     currentPage = parseInt(currentPage, 10); // converte una stringa in un numero intero
     let activeLink = 3;
- 
+    /**
+     * se il numero di pagine è solo una allora non ha senso generare i bottoni 
+     * quindi eseguiamo il comando return se il numero dell' ultima pagina è minore di 2
+     */
+    if ( pageLast < 2 )  return; 
              /**
               * GENERA I BOTTONI [FirstPage] e [Previous]
               * currentPage può assumere solo valori numerici interi da 1 a infinito
