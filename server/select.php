@@ -1,6 +1,9 @@
 <?php
 
- if ( isset($_POST) ) {
+if ( !isset($_POST) ) {
+    header("Location: index.html");
+    die;
+ } 
    
  
 /**
@@ -48,71 +51,23 @@
  * quindi se offset è uguale a 10, e count è uguale a 5: verranno prelevate dalla tabella 
  * le righe: {11} {12} {13} {14} {15}  che popoleranno la pagina [3]
  */
-    function pagination($totalRows, $rowForPage=5, $currentPage=1, $search){ 
-   
-        require "db.php";
+// function pagination($totalRows, $rowForPage=5, $currentPage=1, $search){ 
+function pagination( $rowForPage=5, $currentPage=1, $search){ 
 
-        for ($i=0, $rowStart=-$rowForPage; $i<$currentPage; $rowStart+=$rowForPage, $i++);
+    require "db.php";
 
-        $pageLast = ceil($totalRows / $rowForPage);
+    for ($i=0, $rowStart=-$rowForPage; $i<$currentPage; $rowStart+=$rowForPage, $i++);
 
-        if (empty($search)) {
-    
-            $sql = "SELECT * FROM utenti LIMIT {$rowStart}, {$rowForPage}"; // SELECT * FROM utenti LIMIT '0', '2'
+   // $pageLast = ceil($totalRows / $rowForPage);
 
-        } else {
-         //  echo '{ "status": "error", "error": "search: '.$search.'" }'; die;
-            $sql = "SELECT * FROM utenti WHERE firstname LIKE '%{$search}%' LIMIT {$rowStart}, {$rowForPage}"; // SELECT * FROM utenti LIMIT '0', '2'
-        }
+    if (empty($search)) {
 
-        $result = $mysqli->query($sql);
+        $sql = "SELECT * FROM utenti LIMIT {$rowStart}, {$rowForPage}"; // SELECT * FROM utenti LIMIT '0', '2'
 
-        if ($result->num_rows > 0) {
-            
-            $data = $result->fetch_all( MYSQLI_ASSOC ); //   $data->view = 'modal';  //  print_r($data);
-
-            echo json_encode($data);
-
-            $result->free();
-        } else {
-            
-            echo '{ "status": "ok", "action": "select", "empty": "Database Vuoto 2!" }';
-           // echo '{ "status": "empty", "empty": "pageLast: '.$pageLast.' rowStart: '.$rowStart.' rowForPage: '.$rowForPage.'" }'; die;
-        } 
+    } else {
+      
+        $sql = "SELECT * FROM utenti WHERE firstname LIKE '%{$search}%' LIMIT {$rowStart}, {$rowForPage}"; // SELECT * FROM utenti LIMIT '0', '2'
     }
-
-
-
-
-
-
-    $str = $_POST["pages"]; 
-
-    $obj = json_decode($str);
-
-    $totalRows = $obj->totalRows;
-    $rowForPage = $obj->rowForPage;
-    $currentPage = $obj->currentPage;
-    $search = $obj->search;
-    // echo '{ "status": "empty", "empty": "rowForPage: '.$rowForPage.' currentPage: '.$currentPage.'" }'; die;
-   
-    pagination($totalRows, $rowForPage, $currentPage, $search); 
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-   /*
-    $sql = "SELECT id, firstname, email FROM utenti"; 
 
     $result = $mysqli->query($sql);
 
@@ -120,18 +75,39 @@
         
         $data = $result->fetch_all( MYSQLI_ASSOC ); //   $data->view = 'modal';  //  print_r($data);
 
-        //print_r($data);
         echo json_encode($data);
 
         $result->free();
     } else {
-       
-       echo '{ "status": "empty", "empty": "Database Vuoto!" }';
-    }
-    $mysqli->close();
-
-} else {
-    header("Location: index.html");
+        
+        echo '{ "status": "ok", "action": "select", "empty": "Database Vuoto!" }';
+    } 
+}
 
 
-*/
+
+
+
+
+$str = $_POST["pages"]; 
+
+$obj = json_decode($str);
+
+// $totalRows = $obj->totalRows;
+$rowForPage = $obj->rowForPage;
+$currentPage = $obj->currentPage;
+$search = $obj->search;
+// echo '{ "status": "empty", "empty": "rowForPage: '.$rowForPage.' currentPage: '.$currentPage.'" }'; die;
+
+// pagination($totalRows, $rowForPage, $currentPage, $search); 
+pagination( $rowForPage, $currentPage, $search); 
+
+
+
+
+
+
+
+
+
+

@@ -28,6 +28,9 @@ import { clearTable, appendToTable, fillViewModal, fillUpdateModal } from "./mod
  */
 
 // document.addEventListener('DOMContentLoaded', function() { 
+
+
+    // Al refresh della pagina fa una select al db e se riceve una risposta vengono selezionati tutti i bottoni
     function selectAllButtons(){
 
         let buttons = document.querySelectorAll('.btn');
@@ -35,22 +38,10 @@ import { clearTable, appendToTable, fillViewModal, fillUpdateModal } from "./mod
 
         for ( const button of buttons ) { button.addEventListener('click', clickButton, false); }
         for ( const pageButton of pageButtons ) { pageButton.addEventListener('click', clickButton, false); }
-       // for ( const pageButton of pageButtons ) { pageButton.addEventListener('click', clickPageButton, false); }
-
-/*
-        let btns = document.querySelectorAll('.btn');
-        let pageButtons = document.querySelectorAll('.page-link');
-     
-      const buttons = Object.assign({}, btns, pageButtons);
-      console.log(buttons); // { a: 1, b: 2, c: 3 }
-    
-      for ( const button of buttons ) { button.addEventListener('click', clickButton, false); }
-     */
     }
    
    
    
-    // Al refresh della pagina fa una select al db e se riceve una risposta vengono selezionati tutti i bottoni
 
 
     
@@ -68,21 +59,21 @@ let data, currentPage, pageLast;
  */
 function preparePage(currentPage, search=""){
 
-   const rowForPage=2;
-  
-   const strOfObj_count = { rowForPage: rowForPage, search: search};
+    const rowForPage=2;
 
-   const jsonCount = JSON.stringify(strOfObj_count); // converte l' array di oggetti in formato json
-   
-   data = "count="+jsonCount; // aggiungere "jsonData=" prima della stringa json altrimenti in php l'array $_POST["jsonData"] non viene settato
+    const strOfObj_count = { rowForPage: rowForPage, search: search};
 
-  
-   request('count.php', data)
-   .then((obj) => {
-      
+    const jsonCount = JSON.stringify(strOfObj_count); // converte l' array di oggetti in formato json
+
+    data = "count="+jsonCount; // aggiungere "jsonData=" prima della stringa json altrimenti in php l'array $_POST["jsonData"] non viene settato
+
+request('count.php', data)
+.then((obj) => {
+
         pageLast = obj.pageLast;
         
-        const strOfObj_select = {totalRows: obj.totalRows, rowForPage: obj.rowForPage, currentPage: currentPage, search: search};
+        // const strOfObj_select = {totalRows: obj.totalRows, rowForPage: rowForPage, currentPage: currentPage, search: search};
+        const strOfObj_select = { rowForPage: rowForPage, currentPage: currentPage, search: search};
         
         const pages = JSON.stringify(strOfObj_select); // converte l' array di oggetti in formato json
         
@@ -100,12 +91,43 @@ function preparePage(currentPage, search=""){
 
         console.log(err);
         clearTable(); 
-        pagination(currentPage);
+        pagination(currentPage); // da controllare
         selectAllButtons();
     });
 }
 
 preparePage(1);
+
+
+
+/*
+
+document.getElementById('name').addEventListener('keyup', function () {
+    if (this.value.length === 0) {
+        return;
+    }
+
+        
+    const search = this.value;
+    
+    preparePage(1, search);
+   
+ 
+
+    datalist.textContent = '';
+    for (var i = 0; i < fakeServerResponse.length; i++) {
+        if (fakeServerResponse[i].indexOf(this.value) !== 0) {
+            continue;
+        }
+        var option = document.createElement('option');
+        option.value = fakeServerResponse[i];
+        datalist.appendChild(option);
+    }
+});
+*/
+
+
+
 
 
 function clickButton(e) { 
@@ -249,7 +271,7 @@ function clickButton(e) {
 
 
 
-        case "delete-rows":
+        case "delete-rows": // da controllare
 
             currentPage = document.querySelector('.current') != null ? document.querySelector('.current').getAttribute("currentpage") : 1;
 
